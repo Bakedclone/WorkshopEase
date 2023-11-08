@@ -3,13 +3,14 @@ import CurrencyDollarIcon from '@heroicons/react/24/solid/CurrencyDollarIcon';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Avatar, Card, CardContent, Stack, SvgIcon, Typography } from '@mui/material';
+import { BASE_URL } from 'src/services/helper';
 
 export const OverviewBalance = (props) => {
   const { difference, positive = false, sx } = props;
   const [value, setvalue] = useState();
 
   useEffect(()=>{
-    axios.get('http://localhost:3001/fetch_total_balance')
+    axios.get(BASE_URL + '/fetch_total_balance')
     .then(res=> {
       console.log(res.data);
       setvalue(res.data[0]['SUM(Gold_wgt)'].toFixed(2));

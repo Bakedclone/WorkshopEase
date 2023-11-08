@@ -6,13 +6,14 @@ import { Layout as DashboardLayout } from 'src/layouts/dashboard/layout';
 import { GoldOutTable } from 'src/sections/gold_out/gold_out-table';
 import axios from 'axios'
 import Insert from 'src/sections/gold_out/Insert';
+import { BASE_URL } from 'src/services/helper';
 
 const Page = () => {
   const [data, setdata] = useState([]);
   const [reload, setreload] = useState(false);
 
   useEffect(()=>{
-    axios.get('http://localhost:3001/fetch_gold_out')
+    axios.get(BASE_URL + '/fetch_gold_out')
     .then(res=> {
       // console.log(res.data);
       setdata(res.data);
@@ -73,7 +74,8 @@ const Page = () => {
             </Stack>
 
             {addOpen && <Insert addClose={()=>
-              setaddOpen(false)} reload={()=>
+              setaddOpen(false)} 
+              reload={()=>
               setreload(!reload)}/>}
             <GoldOutTable
               items={data}

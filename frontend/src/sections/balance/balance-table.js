@@ -18,6 +18,7 @@ import Update from "./Update";
 import MagnifyingGlassIcon from "@heroicons/react/24/solid/MagnifyingGlassIcon";
 import { InputAdornment, OutlinedInput, SvgIcon } from "@mui/material";
 import { Scrollbar } from "src/components/scrollbar";
+import { BASE_URL } from 'src/services/helper';
 
 export const BalanceTable = (props) => {
   const {
@@ -27,7 +28,7 @@ export const BalanceTable = (props) => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete("http://localhost:3001/balance/" + id);
+      await axios.delete(BASE_URL + "/balance/" + id);
     } catch (error) {
       console.log(error);
     }
@@ -55,7 +56,8 @@ export const BalanceTable = (props) => {
           onChange={handleInputChange}
           startAdornment={
             <InputAdornment position="start">
-              <SvgIcon color="action" fontSize="small">
+              <SvgIcon color="action" 
+              fontSize="small">
                 <MagnifyingGlassIcon />
               </SvgIcon>
             </InputAdornment>
@@ -123,7 +125,10 @@ export const BalanceTable = (props) => {
         </Box>
       </Scrollbar>
       {updateOpen && (
-        <Update updateClose={() => setupdateOpen(false)} data={items} row={id} reload={reload} />
+        <Update updateClose={() => setupdateOpen(false)} 
+        data={items} 
+        row={id} 
+        reload={reload} />
       )}
     </Card>
   );

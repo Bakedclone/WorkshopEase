@@ -38,8 +38,8 @@ export const AuthGuard = (props) => {
       } else {
         setChecked(true);
       }
-    },
-    [router.isReady]
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    },[router.isReady]
   );
 
   if (!checked) {

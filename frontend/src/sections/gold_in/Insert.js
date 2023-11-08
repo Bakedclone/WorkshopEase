@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import modal from "../../components/modal.module.css";
 import axios from "axios";
 import { Button } from "@mui/material";
+import { BASE_URL } from 'src/services/helper';
 
 function Insert({ addClose, reload }) {
   const [formdata, setformdata] = useState({});
@@ -30,7 +31,7 @@ function Insert({ addClose, reload }) {
     if(valideForm()) return;
     addClose();
     axios
-      .post("http://localhost:3001/add_gold_in", { formdata })
+      .post(BASE_URL + "/add_gold_in", { formdata })
       .then((res) => {
         console.log(res);
         navigate("/");
@@ -53,24 +54,31 @@ function Insert({ addClose, reload }) {
           <div className={modal.form_group}>
             <label>
               <p>*Date :</p>
-              <input type="date" name="DT" onChange={handlechange} />
+              <input type="date" 
+              name="DT" 
+              onChange={handlechange} />
             </label>
           </div>
           <div className={modal.form_group}>
             <label>
               <p>*Customer ID</p>
-              <input type="text" name="C_ID" onChange={handlechange} />
+              <input type="text" 
+              name="C_ID" 
+              onChange={handlechange} />
             </label>
           </div>
           <div className={modal.form_group}>
             <label>
               <p>*Gold wgt. : </p>
-              <input type="text" name="Gold_wgt" onChange={handlechange} />
+              <input type="text" 
+              name="Gold_wgt" 
+              onChange={handlechange} />
             </label>
           </div>
           
           <div style={{color:"red",fontSize:"0.8rem",paddingBottom:"0.5rem"}}>{validationMsg}</div>
-          <Button onClick={handlesubmit} variant="contained">
+          <Button onClick={handlesubmit} 
+          variant="contained">
             Insert
           </Button>
         </form>

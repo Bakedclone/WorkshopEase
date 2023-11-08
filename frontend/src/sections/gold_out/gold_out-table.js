@@ -18,6 +18,7 @@ import Update from "./Update";
 import MagnifyingGlassIcon from "@heroicons/react/24/solid/MagnifyingGlassIcon";
 import { InputAdornment, OutlinedInput, SvgIcon } from "@mui/material";
 import { Scrollbar } from "src/components/scrollbar";
+import { BASE_URL } from 'src/services/helper';
 
 export const GoldOutTable = (props) => {
   const {
@@ -27,7 +28,7 @@ export const GoldOutTable = (props) => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete("http://localhost:3001/gold_out/" + id);
+      await axios.delete(BASE_URL + "/gold_out/" + id);
     } catch (error) {
       console.log(error);
     }
@@ -55,7 +56,8 @@ export const GoldOutTable = (props) => {
           onChange={handleInputChange}
           startAdornment={
             <InputAdornment position="start">
-              <SvgIcon color="action" fontSize="small">
+              <SvgIcon color="action"
+                fontSize="small">
                 <MagnifyingGlassIcon />
               </SvgIcon>
             </InputAdornment>
@@ -87,7 +89,9 @@ export const GoldOutTable = (props) => {
                       key={gold_out.C_ID}
                     >
                       <TableCell>
-                        <Stack alignItems="center" direction="row" spacing={2}>
+                        <Stack alignItems="center"
+                          direction="row"
+                          spacing={2}>
                           <Typography variant="subtitle2">
                             {gold_out.DT.split("-").reverse().join("-")}
                           </Typography>
@@ -122,7 +126,10 @@ export const GoldOutTable = (props) => {
         </Box>
       </Scrollbar>
       {updateOpen && (
-        <Update updateClose={() => setupdateOpen(false)} data={items} row={id} reload={reload} />
+        <Update updateClose={() => setupdateOpen(false)}
+          data={items}
+          row={id}
+          reload={reload} />
       )}
     </Card>
   );

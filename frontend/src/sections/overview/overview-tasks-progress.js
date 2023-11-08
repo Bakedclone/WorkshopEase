@@ -12,13 +12,14 @@ import {
 } from '@mui/material';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import { BASE_URL } from 'src/services/helper';
 
 export const OverviewTasksProgress = (props) => {
   const { sx } = props;
   const [ value, setvalue] = useState();
 
   useEffect(()=>{
-    axios.get('http://localhost:3001/fetch_task_progress')
+    axios.get(BASE_URL + '/fetch_task_progress')
     .then(res=> {
       // console.log(res.data);
       setvalue(res.data);

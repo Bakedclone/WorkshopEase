@@ -2,11 +2,12 @@ import React, { useState } from "react";
 import modal from "../../components/modal.module.css";
 import axios from "axios";
 import { Button } from "@mui/material";
+import { BASE_URL } from 'src/services/helper';
 
 function Insert({ addClose, reload }) {
   const [formdata, setformdata] = useState({});
   const handlechange = (event) => {
-    
+
     const name = event.target.name;
     const value = event.target.value;
     setformdata({ ...formdata, [name]: value });
@@ -16,21 +17,21 @@ function Insert({ addClose, reload }) {
   const [date, setdate] = useState(formatedate);
   const [validationMsg, setvalidationMsg] = useState('');
 
-  const valideForm = ()=>{
-    if(formdata.Gold_wgt && formdata.O_ID && formdata.DT )
+  const valideForm = () => {
+    if (formdata.Gold_wgt && formdata.O_ID && formdata.DT)
       return false;
-    else  {
+    else {
       setvalidationMsg('*Required input must be filled');
       return true;
     }
   }
- 
+
   const handlesubmit = (event) => {
     event.preventDefault();
-    if(valideForm()) return;
+    if (valideForm()) return;
     addClose();
     axios
-      .post("http://localhost:3001/add_gold_out", { formdata })
+      .post(BASE_URL + "/add_gold_out", { formdata })
       .then((res) => {
         console.log(res);
         navigate("/");
@@ -53,24 +54,31 @@ function Insert({ addClose, reload }) {
           <div className={modal.form_group}>
             <label>
               <p>*Date :</p>
-              <input type="date" name="DT" onChange={handlechange} />
+              <input type="date"
+                name="DT"
+                onChange={handlechange} />
             </label>
           </div>
           <div className={modal.form_group}>
             <label>
               <p>*Order ID</p>
-              <input type="text" name="O_ID" onChange={handlechange} />
+              <input type="text"
+                name="O_ID"
+                onChange={handlechange} />
             </label>
           </div>
           <div className={modal.form_group}>
             <label>
               <p>*Gold wgt. : </p>
-              <input type="text" name="Gold_wgt" onChange={handlechange} />
+              <input type="text"
+                name="Gold_wgt"
+                onChange={handlechange} />
             </label>
           </div>
-          
-          <div style={{color:"red",fontSize:"0.8rem",paddingBottom:"0.5rem"}}>{validationMsg}</div>
-          <Button onClick={handlesubmit} variant="contained">
+
+          <div style={{ color: "red", fontSize: "0.8rem", paddingBottom: "0.5rem" }}>{validationMsg}</div>
+          <Button onClick={handlesubmit}
+            variant="contained">
             Insert
           </Button>
         </form>

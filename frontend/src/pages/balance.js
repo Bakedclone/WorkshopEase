@@ -6,19 +6,20 @@ import { Layout as DashboardLayout } from 'src/layouts/dashboard/layout';
 import { BalanceTable } from 'src/sections/balance/balance-table';
 import axios from 'axios'
 import Insert from 'src/sections/balance/Insert';
+import { BASE_URL } from 'src/services/helper';
 
 const Page = () => {
   const [data, setdata] = useState([]);
   const [reload, setreload] = useState(false);
 
-  useEffect(()=>{
-    axios.get('http://localhost:3001/fetch_balance')
-    .then(res=> {
-      // console.log(res.data);
-      setdata(res.data);
-    })
-    .catch(error=> console.log(error));
-  },[reload])
+  useEffect(() => {
+    axios.get(BASE_URL + '/fetch_balance')
+      .then(res => {
+        // console.log(res.data);
+        setdata(res.data);
+      })
+      .catch(error => console.log(error));
+  }, [reload])
 
   const [addOpen, setaddOpen] = useState(false);
 
@@ -65,7 +66,7 @@ const Page = () => {
               </Stack>
               <div>
                 <Button
-                  onClick={()=>{
+                  onClick={() => {
                     setaddOpen(true);
                   }}
                   startIcon={(
@@ -74,21 +75,24 @@ const Page = () => {
                     </SvgIcon>
                   )}
                   variant="contained"
-                  >
+                >
                   Add
                 </Button>
               </div>
             </Stack>
-            
 
-            {addOpen && <Insert addClose={()=>
-              setaddOpen(false)} reload={()=>
-              setreload(!reload)}/>}
+
+            {addOpen && <Insert addClose={() =>
+              setaddOpen(false)} 
+              reload={() =>
+                setreload(!reload)} />}
 
             <BalanceTable
               items={data}
-              reload={()=>{setreload(!reload)
-              console.log("reloadcalled")}}
+              reload={() => {
+                setreload(!reload)
+                console.log("reloadcalled")
+              }}
             />
           </Stack>
         </Container>

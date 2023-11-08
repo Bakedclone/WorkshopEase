@@ -2,6 +2,7 @@ import React,{ useState } from 'react'
 import modal from '../../components/modal.module.css'
 import axios from 'axios';
 import { Box, Button, Container, Stack, SvgIcon, Typography } from '@mui/material';
+import { BASE_URL } from 'src/services/helper';
 
 
 function Update(props) {
@@ -36,7 +37,7 @@ function Update(props) {
       event.preventDefault();
       if(valideForm()) return;
       // console.log(formdata);
-      axios.put('http://localhost:3001/update_gold_in' ,{formdata})
+      axios.put(BASE_URL + '/update_gold_in' ,{formdata})
       .then(res => {
         console.log(res);
         navigate('/');
@@ -61,17 +62,30 @@ function Update(props) {
             <form>
                 <div className={modal.form_group}>
                     <label>
-                        <p>*Date :</p><input type="date" name="DT" value={formdata.DT} onChange={handlechange} />
+                        <p>*Date :</p>
+                        <input type="date" 
+                        name="DT" 
+                        value={formdata.DT} 
+                        onChange={handlechange} />
                     </label>
                 </div>
                 <div className={modal.form_group}>
                     <label>
-                        <p>*Customer ID :</p><input type="text" name="C_ID" value={formdata.C_ID} onChange={handlechange} readOnly='readonly'/>
+                        <p>*Customer ID :</p>
+                        <input type="text" 
+                        name="C_ID" 
+                        value={formdata.C_ID} 
+                        onChange={handlechange} 
+                        readOnly='readonly'/>
                     </label>
                 </div>
                 <div className={modal.form_group}>
                     <label>
-                        <p>*Gold Wgt. : </p><input type="text" name="Gold_wgt" value={formdata.Gold_wgt} onChange={handlechange}/>
+                        <p>*Gold Wgt. : </p>
+                        <input type="text" 
+                        name="Gold_wgt" 
+                        value={formdata.Gold_wgt} 
+                        onChange={handlechange}/>
                     </label>
                 </div>
                 <div style={{color:"red",fontSize:"0.8rem",paddingBottom:"0.5rem"}}>{validationMsg}</div>

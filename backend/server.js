@@ -321,7 +321,7 @@ app.post('/add_gold_out', (req, res)=> {
             receivedData.formdata.DT,
             parseInt(receivedData.formdata.O_ID),
             fetch[0].C_ID,
-            parseFloat(receivedData.formdata.Gold_wgt),
+            parseFloat(receivedData.formdata.Gold_wgt).toFixed(2),
             parseFloat((fetch[0].Wastage/100) * receivedData.formdata.Gold_wgt),
         ]
         
@@ -359,7 +359,7 @@ app.put('/update_gold_out', (req, res)=> {
             parseInt(receivedData.formdata.O_ID),
             fetch[0].C_ID,
             parseFloat(receivedData.formdata.Gold_wgt),
-            parseFloat((fetch[0].Wastage/100) * receivedData.formdata.Gold_wgt),
+            parseFloat((fetch[0].Wastage/100) * receivedData.formdata.Gold_wgt).toFixed(2),
         ]
         
         db.run(sql, [values[0], values[1], values[2], values[3], values[4], values[1]], (err)=>{

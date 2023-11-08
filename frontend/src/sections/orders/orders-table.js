@@ -24,6 +24,7 @@ import MagnifyingGlassIcon from "@heroicons/react/24/solid/MagnifyingGlassIcon";
 import { InputAdornment, OutlinedInput, SvgIcon } from "@mui/material";
 import { Scrollbar } from "src/components/scrollbar";
 // import { getInitials } from "src/utils/get-initials";
+import { BASE_URL } from 'src/services/helper';
 
 export const OrdersTable = (props) => {
   const {
@@ -43,7 +44,7 @@ export const OrdersTable = (props) => {
   console.log(items);
   const handleDelete = async (id) => {
     try {
-      await axios.delete("http://localhost:3001/orders/" + id);
+      await axios.delete(BASE_URL + "/orders/" + id);
     } catch (error) {
       console.log(error);
     }
@@ -73,8 +74,10 @@ export const OrdersTable = (props) => {
           placeholder="Search Customer ID"
           onChange={handleInputChange}
           startAdornment={
-            <InputAdornment position="start">
-              <SvgIcon color="action" fontSize="small">
+            <InputAdornment 
+            position="start">
+              <SvgIcon color="action" 
+              fontSize="small">
                 <MagnifyingGlassIcon />
               </SvgIcon>
             </InputAdornment>
@@ -140,7 +143,9 @@ export const OrdersTable = (props) => {
                       />
                     </TableCell> */}
                       <TableCell>
-                        <Stack alignItems="center" direction="row" spacing={2}>
+                        <Stack alignItems="center" 
+                        direction="row" 
+                        spacing={2}>
                           {/* <Avatar src={orders.avatar}>
                           {getInitials(orders.name)}
                         </Avatar> */}
@@ -182,7 +187,10 @@ export const OrdersTable = (props) => {
         </Box>
       </Scrollbar>
       {updateOpen && (
-        <Update updateClose={() => setupdateOpen(false)} data={items} row={id} reload={reload} />
+        <Update updateClose={() => setupdateOpen(false)} 
+        data={items} 
+        row={id} 
+        reload={reload} />
       )}
       {/* <TablePagination
         component="div"

@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import {BsFillTrashFill, BsFillPencilFill} from 'react-icons/bs'
+import { BsFillTrashFill, BsFillPencilFill } from 'react-icons/bs'
 import axios from 'axios';
 import { useState, useContext } from 'react';
 import {
@@ -18,6 +18,7 @@ import Update from './Update';
 import MagnifyingGlassIcon from '@heroicons/react/24/solid/MagnifyingGlassIcon';
 import { InputAdornment, OutlinedInput, SvgIcon } from '@mui/material';
 import { Scrollbar } from 'src/components/scrollbar';
+import { BASE_URL } from 'src/services/helper';
 
 export const CustomersTable = (props) => {
   const {
@@ -25,32 +26,32 @@ export const CustomersTable = (props) => {
     reload
   } = props;
 
-  const handleDelete = async (id)=> {
+  const handleDelete = async (id) => {
     try {
-      await axios.delete('http://localhost:3001/customer/'+id);
+      await axios.delete(BASE_URL + '/customer/' + id);
     }
-    catch(error) {
+    catch (error) {
       console.log(error);
     }
   }
-    const [searchValue, setSearchValue] = useState('');
-    const handleInputChange = (event) => {
-      setSearchValue(event.target.value);
-      console.log(searchValue);
-    };
-  const filterData = items.filter((customers)=>{
-    if(customers.C_ID === searchValue || searchValue.length == 0)
-        return true;
+  const [searchValue, setSearchValue] = useState('');
+  const handleInputChange = (event) => {
+    setSearchValue(event.target.value);
+    console.log(searchValue);
+  };
+  const filterData = items.filter((customers) => {
+    if (customers.C_ID === searchValue || searchValue.length == 0)
+      return true;
     else
-        return false;
-})
+      return false;
+  })
 
-  const [ updateOpen, setupdateOpen ] = useState( false ); 
-  const [ id, setid ] = useState();
+  const [updateOpen, setupdateOpen] = useState(false);
+  const [id, setid] = useState();
 
   return (
     <Card>
-      <Card sx={{ pt: 2 , pb:5, pl:1}}>
+      <Card sx={{ pt: 2, pb: 5, pl: 1 }}>
         <OutlinedInput
           defaultValue=""
           fullWidth
@@ -126,12 +127,15 @@ export const CustomersTable = (props) => {
                     </TableCell>
                     <TableCell>
                       <span className={TableStyle.actions}>
-                        <BsFillTrashFill className={TableStyle.delete} onClick={ () => {handleDelete(customer.C_ID);
-                        reload()} }/>
-                        <BsFillPencilFill onClick={ ()=> {
+                        <BsFillTrashFill className={TableStyle.delete}
+                          onClick={() => {
+                            handleDelete(customer.C_ID);
+                            reload()
+                          }} />
+                        <BsFillPencilFill onClick={() => {
                           setid(customer.C_ID);
                           setupdateOpen(true);
-                          }}/>
+                        }} />
                       </span>
                     </TableCell>
                   </TableRow>
@@ -141,8 +145,11 @@ export const CustomersTable = (props) => {
           </Table>
         </Box>
       </Scrollbar>
-      {updateOpen && <Update updateClose={()=>
-              setupdateOpen(false)} data={items} row={id} reload={reload}/>}
+      {updateOpen && <Update updateClose={() =>
+        setupdateOpen(false)}
+        data={items}
+        row={id}
+        reload={reload} />}
     </Card>
   );
 };

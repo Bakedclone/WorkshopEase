@@ -6,13 +6,14 @@ import { Layout as DashboardLayout } from 'src/layouts/dashboard/layout';
 import { OrdersTable } from 'src/sections/orders/orders-table';
 import axios from 'axios'
 import Insert from 'src/sections/orders/Insert';
+import { BASE_URL } from 'src/services/helper';
 
 const Page = () => {
   const [data, setdata] = useState([]);
   const [reload, setreload] = useState(false);
 
   useEffect(()=>{
-    axios.get('http://localhost:3001/fetch_orders')
+    axios.get(BASE_URL + '/fetch_orders')
     .then(res=> {
       console.log(res.data);
       setdata(res.data);
@@ -74,7 +75,8 @@ const Page = () => {
             </Stack>
 
             {addOpen && <Insert addClose={()=>
-              setaddOpen(false)} reload={()=>
+              setaddOpen(false)} 
+              reload={()=>
               setreload(!reload)}/>}
 
             <OrdersTable

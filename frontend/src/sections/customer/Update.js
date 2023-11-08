@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import modal from "../../components/modal.module.css";
 import axios from "axios";
 import { Button } from "@mui/material";
+import { BASE_URL } from 'src/services/helper';
 
 function Update(props) {
   const rowData = props.data.filter((customers) => {
@@ -31,7 +32,7 @@ function Update(props) {
     if (valideForm()) return;
     // console.log(formdata);
     axios
-      .put("http://localhost:3001/update_customer", { formdata })
+      .put(BASE_URL + "/update_customer", { formdata })
       .then((res) => {
         console.log(res);
         navigate("/");
@@ -55,7 +56,10 @@ function Update(props) {
           <div className={modal.form_group}>
             <label>
               <p>*Name :</p>
-              <input type="text" name="Name" value={formdata.Name} onChange={handlechange} />
+              <input type="text"
+                name="Name"
+                value={formdata.Name}
+                onChange={handlechange} />
             </label>
           </div>
           <div className={modal.form_group}>
@@ -73,25 +77,34 @@ function Update(props) {
           <div className={modal.form_group}>
             <label>
               <p>E-mail : </p>
-              <input type="text" name="Mail" value={formdata.Mail} onChange={handlechange} />
+              <input type="text"
+                name="Mail"
+                value={formdata.Mail}
+                onChange={handlechange} />
             </label>
           </div>
           <div className={modal.form_group}>
             <label>
               <p>Contact :</p>{" "}
-              <input type="text" name="Contact" value={formdata.Contact} onChange={handlechange} />
+              <input type="text"
+                name="Contact"
+                value={formdata.Contact}
+                onChange={handlechange} />
             </label>
           </div>
           <div className={modal.form_group}>
             <label>
               <p>Address :</p>{" "}
-              <textarea name="Address" value={formdata.Address} onChange={handlechange} />
+              <textarea name="Address"
+                value={formdata.Address}
+                onChange={handlechange} />
             </label>
           </div>
           <div style={{ color: "red", fontSize: "0.8rem", paddingBottom: "0.5rem" }}>
             {validationMsg}
           </div>
-          <Button onClick={handlesubmit} variant="contained">
+          <Button onClick={handlesubmit}
+            variant="contained">
             Update
           </Button>
         </form>

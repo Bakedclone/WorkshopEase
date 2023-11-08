@@ -3,13 +3,14 @@ import CurrencyDollarIcon from '@heroicons/react/24/solid/CurrencyDollarIcon';
 import { Avatar, Card, CardContent, Stack, SvgIcon, Typography } from '@mui/material';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import { BASE_URL } from 'src/services/helper';
 
 export const OverviewTotalProfit = (props) => {
   const { sx } = props;
   const [value, setvalue] = useState(0);
 
   useEffect(()=>{
-    axios.get('http://localhost:3001/fetch_total_profit')
+    axios.get(BASE_URL + '/fetch_total_profit')
     .then(res=> {
       console.log(res.data);
       setvalue(res.data[0]['SUM(Profit)'].toFixed(2));

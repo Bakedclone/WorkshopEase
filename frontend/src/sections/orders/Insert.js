@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import modal from "../../components/modal.module.css";
 import axios from "axios";
 import { Button } from "@mui/material";
+import { BASE_URL } from 'src/services/helper';
 
 function Insert({ addClose, reload }) {
   const [formdata, setformdata] = useState({});
@@ -31,7 +32,7 @@ function Insert({ addClose, reload }) {
     if(valideForm()) return;
     addClose();
     axios
-      .post("http://localhost:3001/add_orders", { formdata })
+      .post(BASE_URL + "/add_orders", { formdata })
       .then((res) => {
         console.log(res);
       })
@@ -48,7 +49,8 @@ function Insert({ addClose, reload }) {
         }
       }}
     >
-      <div className={modal.modal} style={{width:'50rem'}}>
+      <div className={modal.modal} 
+      style={{width:'50rem'}}>
         <form>
           <div className={modal.parent}>
             <div className={modal.child}>
@@ -56,31 +58,41 @@ function Insert({ addClose, reload }) {
             <div className={modal.form_group}>
               <label>
                 <p>*Date :</p>
-                <input type="date" name="DT" onChange={handlechange} />
+                <input type="date" 
+                name="DT" 
+                onChange={handlechange} />
               </label>
             </div>
             <div className={modal.form_group}>
               <label>
                 <p>*Order ID :</p>
-                <input type="text" name="O_ID" onChange={handlechange} />
+                <input type="text" 
+                name="O_ID" 
+                onChange={handlechange} />
               </label>
             </div>
             <div className={modal.form_group}>
               <label>
                 <p>*Customer ID</p>
-                <input type="text" name="C_ID" onChange={handlechange} />
+                <input type="text" 
+                name="C_ID" 
+                onChange={handlechange} />
               </label>
             </div>
           <div className={modal.form_group}>
             <label>
               <p>Category :</p>
-              <input type="text" name="Category" onChange={handlechange} />
+              <input type="text" 
+              name="Category" 
+              onChange={handlechange} />
             </label>
           </div>
           <div className={modal.form_group}>
             <label>
               <p>Approx Wgt. :</p>
-              <input type="text" name="Approx_wgt" onChange={handlechange} />
+              <input type="text" 
+              name="Approx_wgt" 
+              onChange={handlechange} />
             </label>
           </div>
           
@@ -89,35 +101,45 @@ function Insert({ addClose, reload }) {
           <div className={modal.form_group}>
             <label>
               <p>Piece :</p>
-              <input type="Number" name="Piece" onChange={handlechange} />
+              <input type="Number" 
+              name="Piece" 
+              onChange={handlechange} />
             </label>
           </div>
           <div className={modal.form_group}>
             <label>
               <p>Size :</p>
-              <select onChange={handlechange} name="Size">
-                <option selected disabled> Select Size </option>
-                <option value="2'1">2'1</option>
+              <select onChange={handlechange} 
+              name="Size">
+                <option selected 
+                disabled> Select Size </option>
+                <option value="2'1">2&apos;1</option>
               </select>
             </label>
           </div>
           <div className={modal.form_group}>
             <label>
               <p>*Wastage :</p>
-              <input type="text" name="Wastage" onChange={handlechange} />
+              <input type="text" 
+              name="Wastage" 
+              onChange={handlechange} />
             </label>
           </div>
           <div className={modal.form_group}>
             <label>
               <p>Extra Ghut :</p>
-              <input type="text" name="Extra_ghut" onChange={handlechange} />
+              <input type="text" 
+              name="Extra_ghut" 
+              onChange={handlechange} />
             </label>
           </div>
           
           <div style={{color:"red",fontSize:"0.8rem",paddingBottom:"0.5rem"}}>{validationMsg}</div>
           </div>
           </div>
-          <Button onClick={handlesubmit} variant="contained" style={{marginLeft:"1rem"}}>
+          <Button onClick={handlesubmit} 
+          variant="contained" 
+          style={{marginLeft:"1rem"}}>
             Insert
           </Button>
         </form>

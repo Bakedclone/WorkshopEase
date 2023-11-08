@@ -14,6 +14,7 @@ import { alpha, useTheme } from '@mui/material/styles';
 import { Chart } from 'src/components/chart';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import { BASE_URL } from 'src/services/helper';
 
 const useChartOptions = () => {
   const theme = useTheme();
@@ -109,28 +110,34 @@ const useChartOptions = () => {
 export const OverviewMonthlyProfit = (props) => {
   // const { chartSeries, sx } = props;
   const { sx } = props;
-
+  const [reload, setreload] = useState(false);
   const chartOptions = useChartOptions();
 
-  let chartSeries=[
-    {
-      name: 'This year',
-      data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-    }
-  ];
-  // const [ chartSeries, setchartSeries] = useState({});
+  // var chartSeries=[
+  //   {
+  //     name: 'This year',
+  //     data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+  //   }
+  // ];
+  const [ chartSeries, setchartSeries] = useState([{
+        name: 'This year',
+        data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+      }]);
 
   useEffect(()=>{
-    axios.get('http://localhost:3001/fetch_monthly_profit')
+    axios.get(BASE_URL + '/fetch_monthly_profit')
     .then(res=> {
       let fetch = res.data
       fetch.map((monthly_profit)=>{
         const month = Number(monthly_profit['Month'])
-        chartSeries[0]['data'][month] = Number(monthly_profit['TotalProfit']);
+
+        const updatedList = [...chartSeries];
+        updatedList[0]['data'][month] = Number(monthly_profit['TotalProfit']);
+        setchartSeries(updatedList);
       })
     })
-    .catch(error=> console.log(error));
-  })
+    .catch(error=> console.log(error)); 
+  },[reload])
 
   return (
     <Card sx={sx}>
@@ -144,6 +151,10 @@ export const OverviewMonthlyProfit = (props) => {
                 <ArrowPathIcon />
               </SvgIcon>
             )}
+            onClick={()=>{
+              setreload(!reload);
+              console.log(reload);
+            }}
           >
             Sync
           </Button>
@@ -177,7 +188,7 @@ export const OverviewMonthlyProfit = (props) => {
   );
 };
 
-OverviewMonthlyProfit.protoTypes = {
+OverviewMonthlyProfit.PropTypes = {
   chartSeries: PropTypes.array.isRequired,
   sx: PropTypes.object
 };

@@ -18,13 +18,14 @@ import Update from "./Update";
 import MagnifyingGlassIcon from "@heroicons/react/24/solid/MagnifyingGlassIcon";
 import { InputAdornment, OutlinedInput, SvgIcon } from "@mui/material";
 import { Scrollbar } from "src/components/scrollbar";
+import { BASE_URL } from 'src/services/helper';
 
 export const GoldINTable = (props) => {
   const { items = [], reload } = props;
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete("http://localhost:3001/gold_in/" + id);
+      await axios.delete(BASE_URL + "/gold_in/" + id);
     } catch (error) {
       console.log(error);
     }
@@ -52,7 +53,8 @@ export const GoldINTable = (props) => {
           onChange={handleInputChange}
           startAdornment={
             <InputAdornment position="start">
-              <SvgIcon color="action" fontSize="small">
+              <SvgIcon color="action" 
+              fontSize="small">
                 <MagnifyingGlassIcon />
               </SvgIcon>
             </InputAdornment>
@@ -77,10 +79,14 @@ export const GoldINTable = (props) => {
                 .reverse()
                 .map((gold_in) => {
                   return (
-                    <TableRow hover key={gold_in.ID}>
+                    <TableRow hover 
+                    key={gold_in.ID}>
                       <TableCell>
-                        <Stack alignItems="center" direction="row" spacing={2}>
-                          <Typography variant="subtitle2">
+                        <Stack alignItems="center" 
+                        direction="row" 
+                        spacing={2}>
+                          <Typography 
+                          variant="subtitle2">
                             {gold_in.DT.split("-").reverse().join("-")}
                           </Typography>
                         </Stack>
@@ -112,7 +118,10 @@ export const GoldINTable = (props) => {
         </Box>
       </Scrollbar>
       {updateOpen && (
-        <Update updateClose={() => setupdateOpen(false)} data={items} row={id} reload={reload} />
+        <Update updateClose={() => setupdateOpen(false)} 
+        data={items} 
+        row={id} 
+        reload={reload} />
       )}
     </Card>
   );

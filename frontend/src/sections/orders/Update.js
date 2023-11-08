@@ -2,6 +2,7 @@ import React,{ useState } from 'react'
 import modal from '../../components/modal.module.css'
 import axios from 'axios';
 import { Box, Button, Container, Stack, SvgIcon, Typography } from '@mui/material';
+import { BASE_URL } from 'src/services/helper';
 
 
 function Update(props) {
@@ -36,7 +37,7 @@ function Update(props) {
       event.preventDefault();
       if(valideForm()) return;
       // console.log(formdata);
-      axios.put('http://localhost:3001/update_orders' ,{formdata})
+      axios.put(BASE_URL + '/update_orders' ,{formdata})
       .then(res => {
         console.log(res);
         navigate('/');
@@ -59,7 +60,8 @@ function Update(props) {
         props.updateClose();
       }
     }}>
-        <div className={modal.modal} style={{width:'50rem'}}>
+        <div className={modal.modal} 
+        style={{width:'50rem'}}>
         <form>
           <div className={modal.parent}>
             <div className={modal.child}>
@@ -67,31 +69,47 @@ function Update(props) {
             <div className={modal.form_group}>
               <label>
                 <p>*Date :</p>
-                <input type="date" name="DT" onChange={handlechange} value = {formdata.DT}/>
+                <input type="date" 
+                name="DT" 
+                onChange={handlechange} 
+                value = {formdata.DT}/>
               </label>
             </div>
             <div className={modal.form_group}>
               <label>
                 <p>*Order ID :</p>
-                <input type="text" name="O_ID" onChange={handlechange} value={formdata.O_ID} readOnly="readonly"/>
+                <input type="text" 
+                name="O_ID" 
+                onChange={handlechange} 
+                value={formdata.O_ID} 
+                readOnly="readonly"/>
               </label>
             </div>
             <div className={modal.form_group}>
               <label>
                 <p>*Customer ID</p>
-                <input type="text" name="C_ID" onChange={handlechange} value={formdata.C_ID}/>
+                <input type="text" 
+                name="C_ID" 
+                onChange={handlechange} 
+                value={formdata.C_ID}/>
               </label>
             </div>
           <div className={modal.form_group}>
             <label>
               <p>*Category :</p>
-              <input type="text" name="Category" onChange={handlechange} value={formdata.Category}/>
+              <input type="text" 
+              name="Category" 
+              onChange={handlechange} 
+              value={formdata.Category}/>
             </label>
           </div>
           <div className={modal.form_group}>
             <label>
               <p>*Approx Wgt. :</p>
-              <input type="text" name="Approx_wgt" onChange={handlechange} value={formdata.Approx_wgt}/>
+              <input type="text" 
+              name="Approx_wgt" 
+              onChange={handlechange} 
+              value={formdata.Approx_wgt}/>
             </label>
           </div>
           
@@ -100,18 +118,24 @@ function Update(props) {
           <div className={modal.form_group}>
             <label>
               <p>*Piece :</p>
-              <input type="Number" name="Piece" onChange={handlechange} value={formdata.Piece}/>
+              <input type="Number" 
+              name="Piece" 
+              onChange={handlechange} 
+              value={formdata.Piece}/>
             </label>
           </div>
           <div className={modal.form_group}>
             <label>
               <p>*Size :</p>
-              <select value={selected} name="Size" onChange={(event)=>{
+              <select value={selected} 
+              name="Size" 
+              onChange={(event)=>{
                 setSelected(event.target.value);
                 handlechange(event);
               }}>
                 {options.map(value => (
-                  <option key={value} value={value}>
+                  <option key={value} 
+                  value={value}>
                     {value}
                   </option>
                 ))}
@@ -121,20 +145,28 @@ function Update(props) {
           <div className={modal.form_group}>
             <label>
               <p>*Wastage :</p>
-              <input type="text" name="Wastage" onChange={handlechange} value={formdata.Wastage}/>
+              <input type="text" 
+              name="Wastage" 
+              onChange={handlechange} 
+              value={formdata.Wastage}/>
             </label>
           </div>
           <div className={modal.form_group}>
             <label>
               <p>*Extra Ghut :</p>
-              <input type="text" name="Extra_ghut" onChange={handlechange} value={formdata.Extra_ghut}/>
+              <input type="text" 
+              name="Extra_ghut" 
+              onChange={handlechange} 
+              value={formdata.Extra_ghut}/>
             </label>
           </div>
           
           <div style={{color:"red",fontSize:"0.8rem",paddingBottom:"0.5rem"}}>{validationMsg}</div>
           </div>
           </div>
-          <Button onClick={handlesubmit} variant="contained" style={{marginLeft:"1rem"}}>
+          <Button onClick={handlesubmit} 
+          variant="contained" 
+          style={{marginLeft:"1rem"}}>
             Update
           </Button>
         </form>
